@@ -1,0 +1,18 @@
+# Detect text automatically; keep images, fonts, videos and PDFs binary.
+* text=auto
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.cjs text eol=lf
+*.mjs text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.webp binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.mp4 binary
+*.pdf binary
+*.ttf binary
+*.woff binary
+*.woff2 binary

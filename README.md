@@ -1,28 +1,38 @@
-# Space Arena landing
+# Space Arena Landing
 
-## Current demonstration
+Static HTML, CSS and JavaScript demonstration site. No npm dependencies, Vite, CMS or production server.
 
-Concept D: `promo-full/index.html`; News: `promo-full/news-v2.html`; FAQ: `promo-full/faq-v2.html`; Interactive Demo: `interactive-demo/index.html`. Earlier concepts are retained.
+**Demo:** https://nebula223.github.io/space-arena-landing/
 
-GitHub Pages build, direct routes, safe publication boundaries and update instructions: [DEPLOYMENT.md](DEPLOYMENT.md).
+## Pages
 
-Static HTML / CSS / JavaScript. No build step required.
+- [Concept D](https://nebula223.github.io/space-arena-landing/promo-full/index.html)
+- [News and complete articles](https://nebula223.github.io/space-arena-landing/promo-full/news-v2.html)
+- [FAQ](https://nebula223.github.io/space-arena-landing/promo-full/faq-v2.html)
+- [Interactive Demo — ship builder and scripted battle](https://nebula223.github.io/space-arena-landing/interactive-demo/index.html)
+- [All concepts](https://nebula223.github.io/space-arena-landing/START-HERE.html)
 
-## Preview
+The original Hangar, alternative landing and art directions A / B / C are preserved. Every nested article has a real HTML entry point and supports direct navigation/reload.
 
-Run `node preview.cjs` in this directory, then open http://127.0.0.1:4173.
+## Local preview
 
-## Content and responsive behavior
+Run `node preview.cjs`, then open `http://127.0.0.1:4173/promo-full/index.html` or `http://127.0.0.1:4173/interactive-demo/index.html`.
 
-- Desktop: above 1024px. Tablet: 769–1024px. Mobile: up to 768px, with refinements below 480px.
-- All visible copy is available in English and Russian. Language preference is saved locally.
-- News, webshop, wiki and socials open their external destinations. Download scrolls to the app stores.
-- Play for free currently opens a temporary download notice. Replace that event handler in `script.js` when the WebGL launch contract is available.
-- The engineering block illustrates module categories; it is not a functional game ship editor.
-- Store gallery artwork is preserved in full, including English text embedded in official images. See `assets/SOURCES.md`.
+## GitHub Pages
 
-## Validation
+Actions builds the audited static dependency graph into `dist/`, checks local links, then deploys it to Pages. The root redirects to Concept D; the earliest landing remains available as `classic.html` in the generated site.
 
-`node verify.cjs` runs local browser checks on 1440, 1024, 768, 390 and 320px with the bundled Playwright and installed Edge. Preview images are written to `qa/`. The helper uses this workstation's bundled runtime path; the website itself has no dependency on it.
+Build from a fresh checkout with Node.js 24:
 
-Google Fonts supplies Manrope and Russo One. System font fallbacks apply when offline.
+```sh
+node scripts/build-pages.cjs
+node scripts/check-pages.cjs
+```
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for direct routes, Git update commands and the separate sanitized publication branch used by the original design workspace. Do not push the private design history with `git push --all`.
+
+## Demo boundaries
+
+RU/EN and responsive layouts are retained. Interactive Demo is an illustrative, scripted Canvas concept, not the actual game balance or AI. WebGL is not connected because a build/entry URL has not been supplied; the existing placeholder remains intact.
+
+Game images and branding belong to their respective rights holders. Some promotional illustrations are temporary concept artwork. Local font licenses are included beside their assets. Working archives, the original brief, references, unused masters, local QA, caches and secrets are not included in the public snapshot.
