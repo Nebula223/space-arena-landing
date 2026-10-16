@@ -1,0 +1,78 @@
+# Local source material and reference archives; keep on disk, outside Git.
+/_PromoRes/
+/_PromoRes.zip
+/Pirate_Reference/
+/References/
+*.zip
+*.7z
+*.rar
+
+# Generated visual QA and exports, not runtime website assets.
+**/qa/
+/art-directions/screenshots/
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Dependencies, caches and transient builds (the current site is buildless).
+node_modules/
+.npm/
+.pnpm-store/
+.yarn/cache/
+.cache/
+.parcel-cache/
+.vite/
+.next/
+.nuxt/
+.turbo/
+dist/
+build/
+coverage/
+playwright-report/
+test-results/
+tmp/
+temp/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Credentials and machine-local settings. Never track real secrets.
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+*.p12
+*.pfx
+**/credentials*.json
+**/service-account*.json
+.aws/
+.agents/
+.codex/
+.openai/
+.vscode/
+.idea/
+
+# OS files.
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Portable demonstration packages.
+/exports/
+
+# Additional local credentials and publication scratch files.
+.npmrc
+.pypirc
+.netrc
+id_rsa
+id_ed25519
+*.kdbx
+*.keystore
+*.publish-index*
+/assets/legacy/*.source.*

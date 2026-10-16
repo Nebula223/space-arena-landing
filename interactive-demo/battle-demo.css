@@ -1,0 +1,33 @@
+.launch-row{margin:5px 25px 16px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:20px}.launch-row strong{font:700 21px Condensed,sans-serif}.launch-row p{font-size:11px;color:var(--muted);margin-top:5px}.launch-row .button{flex-shrink:0}.battle-dialog{width:min(1080px,94vw);max-width:94vw;max-height:94svh;overflow:auto;border-color:#557c8e;box-shadow:0 0 80px #000b}.arena-heading{padding:28px 32px 20px;padding-right:65px}.arena-heading .eyebrow{margin-bottom:10px;font-size:8px}.arena-heading h2{font-size:34px}.arena-heading>p:last-child{font-size:10px;color:#90adbc;margin-top:10px}.arena-hud{display:grid;grid-template-columns:1fr 50px 1fr;gap:20px;padding:0 32px 20px;align-items:center}.arena-hud>div{display:grid;gap:8px}.arena-hud>div:last-child{text-align:right}.arena-hud span{font:9px var(--mono);letter-spacing:1.4px}.arena-vs{text-align:center;color:#63889d}progress{display:block;width:100%;height:5px;border:0;background:#203444;appearance:none}progress::-webkit-progress-bar{background:#203444}progress::-webkit-progress-value{background:#81dbdc}progress::-moz-progress-bar{background:#81dbdc}#enemy-health::-webkit-progress-value{background:#f9b45a}#enemy-health::-moz-progress-bar{background:#f9b45a}.arena-stage{position:relative;background:#020811;border-block:1px solid #335363}.arena-stage canvas{display:block;width:100%;height:auto;aspect-ratio:1200/680}.arena-stamp{position:absolute;bottom:12px;left:25px;font:7px var(--mono);letter-spacing:1.5px;color:#789aaa}.arena-report{padding:22px 32px 12px;min-height:115px}.arena-report h3{font-size:26px;color:var(--teal)}.arena-report p{font-size:12px;color:#9db8c6;margin-top:10px;max-width:800px}.arena-actions{display:flex;gap:25px;align-items:center;padding:12px 32px 28px}.arena-actions .button{font-size:12px;min-height:46px;padding:12px 24px}.arena-secondary{background:none;font-size:11px;color:#bad3df;border-bottom:1px solid #507688;padding:6px 0}.arena-secondary:hover{color:var(--teal)}
+@media(max-width:768px){.launch-row{margin:10px 14px 15px;padding-top:15px;display:block}.launch-row strong{font-size:20px}.launch-row p{font-size:10px}.launch-row .button{width:100%;margin-top:16px}.arena-heading{padding:22px 18px 18px;padding-right:50px}.arena-heading h2{font-size:28px}.arena-heading .eyebrow{font-size:7px;letter-spacing:1px}.arena-heading>p:last-child{font-size:9px}.arena-hud{padding:0 18px 16px;gap:10px;grid-template-columns:1fr 25px 1fr}.arena-hud span{font-size:7px;letter-spacing:.6px}.arena-stage canvas{aspect-ratio:1.3;object-fit:contain}.arena-stamp{font-size:6px;left:12px;bottom:8px;letter-spacing:.5px}.arena-report{padding:20px 18px 8px;min-height:145px}.arena-report h3{font-size:24px}.arena-report p{font-size:11px}.arena-actions{padding:12px 18px 22px;gap:18px;flex-wrap:wrap}.arena-actions .button{width:100%;font-size:12px}.arena-secondary{font-size:10px}}
+@media(max-width:768px){.build-panel>.launch-row{order:6}.build-panel>.build-note{order:7}}
+/* Keep the whole loop, including the return action, within the modal viewport. */
+.battle-dialog .arena-stage canvas{max-height:48svh;object-fit:contain}
+@media(max-width:768px){.battle-dialog .arena-stage canvas{aspect-ratio:1200/680}}
+/* Battle B: the world camera adapts to this surface, not a letterboxed bitmap. */
+.battle-dialog{width:min(1160px,96vw);max-width:96vw;background:#08121d;overscroll-behavior:contain}
+.battle-dialog .arena-heading{padding:20px 28px 14px;padding-right:60px}
+.battle-dialog .arena-heading h2{font-size:30px}
+.battle-dialog .arena-heading .eyebrow{font-size:10px}
+.battle-dialog .arena-heading>p:last-child{font-size:12px;line-height:1.5}
+.battle-dialog .arena-hud{padding:0 28px 14px}
+.battle-dialog .arena-stage canvas{width:100%;height:clamp(240px,48svh,540px);max-height:none;aspect-ratio:auto;object-fit:initial}
+.battle-dialog .arena-report{padding:16px 28px 8px;min-height:98px}
+.battle-dialog .arena-report h3{font-size:25px}
+.battle-dialog .arena-report p{line-height:1.6;margin-top:6px}
+.battle-dialog .arena-actions{padding:12px 28px 22px}
+.battle-dialog button:focus-visible{outline:2px solid #9befff;outline-offset:4px}
+@media(max-width:768px){
+ .battle-dialog .arena-heading{padding:18px 18px 12px;padding-right:48px}
+ .battle-dialog .arena-heading h2{font-size:25px}
+ .battle-dialog .arena-heading .eyebrow{font-size:9px;letter-spacing:.7px}
+ .battle-dialog .arena-heading>p:last-child{font-size:11px}
+ .battle-dialog .arena-hud{padding:0 18px 12px}
+ .battle-dialog .arena-hud span{font-size:9px}
+ .battle-dialog .arena-stage canvas{height:clamp(280px,40svh,430px)}
+ .battle-dialog .arena-report{padding:14px 18px 8px;min-height:112px}
+ .battle-dialog .arena-report h3{font-size:23px}
+ .battle-dialog .arena-report p{font-size:12px}
+ .battle-dialog .arena-actions{padding:10px 18px 20px;gap:14px}
+ .battle-dialog .arena-secondary{font-size:12px;min-height:40px}
+}
