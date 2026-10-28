@@ -23,7 +23,8 @@ dialog{background:#07131f;color:white;border:1px solid #6a94a780;padding:28px;ma
 .hero-shade{background:linear-gradient(180deg,#020a1666 0%,#020a160a 38%,#050c1640 60%,#050c16d9 86%,#050c16 100%)}
 @media(max-width:768px){.hero-art{object-position:38% center}.hero-shade{background:linear-gradient(180deg,#020a164d 0%,#020a160a 35%,#050c1659 59%,#050c16de 84%,#050c16 100%)}}
 
-/* Viewport composition pass: width AND height, not a scaled-down page. */
+/* Compact windows only; the original wide/QHD cascade is untouched. */
+@media (max-width:1920px) and (max-height:1080px){
 :root{--header-height:76px;--scene-space:clamp(24px,4svh,52px)}
 html{scroll-padding-top:var(--header-height)}
 .header .header-inner{min-height:calc(var(--header-height) - 1px);padding-block:12px}
@@ -32,26 +33,6 @@ html{scroll-padding-top:var(--header-height)}
 .hero .hero-center .play-button{margin-top:24px}
 .hero .hero-caption{margin-top:18px}
 .hero .scroll-cue{bottom:22px}
-.forge.forge{padding:0;overflow:visible}
-.forge-layout{max-width:1800px;margin:auto;padding:var(--scene-space) 6%;min-height:calc(100svh - var(--header-height));display:grid;grid-template-columns:minmax(300px,.32fr) minmax(0,.68fr);grid-template-areas:'intro art' 'controls art' 'actions art';gap:18px 40px;align-content:center}
-.forge .section-intro{grid-area:intro;display:block;padding:0;margin:0;min-width:0}
-.forge .section-intro h1{font-size:clamp(40px,4.8svh,64px);line-height:1.04;letter-spacing:-.025em}
-.forge .section-intro p{font-size:16px;line-height:1.7;max-width:380px;margin:20px 0 0}
-.forge .ship-controls{grid-area:controls;max-width:none;margin:0;padding:0;gap:10px 20px;flex-wrap:wrap;align-self:start}
-.forge .ship-controls button[data-carousel-go]{font-size:17px;min-height:44px;padding-block:9px}
-.forge .ship-controls .carousel-pause{margin-left:0}
-.forge .assembly-scene{grid-area:art;align-self:center;aspect-ratio:auto;width:100%;height:min(720px,calc(100svh - var(--header-height) - 2*var(--scene-space)));max-height:none;margin:0;min-width:0}
-.forge .assembly-scene img{max-height:none}
-.forge .assembly-fade{background:linear-gradient(#080e1c,transparent 8%,transparent 92%,#080e1c)}
-.forge .forge-end{grid-area:actions;padding:0;margin:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:8px}
-.forge .forge-end .text-link{font-size:16px;min-height:44px;padding-block:10px}
-.outfitting{background:#0a1422;border-block:1px solid var(--line);padding:clamp(32px,5svh,64px) 0}
-.outfitting-heading{max-width:1580px;margin:auto;padding:0 6%}
-.outfitting-heading h2{font-size:clamp(30px,3.5vw,48px);letter-spacing:-.02em}
-.outfitting .module-strip{margin:28px auto 0;gap:6%;padding-inline:6%}
-.outfitting .module-copy{min-height:0}
-.outfitting .module-copy h2{font-size:28px}
-.outfitting .module-copy p{font-size:16px}
 .combat .combat-scene{min-height:calc(100svh - var(--header-height));height:auto;max-height:none;display:flex;flex-direction:column;justify-content:space-between;gap:clamp(120px,26svh,350px);padding:var(--scene-space) 6%}
 .combat .combat-scene>img{inset:0;width:100%;height:100%;object-position:center;mask-image:none}
 .combat .combat-scene h2{padding:0;font-size:clamp(44px,7.5svh,96px);line-height:1.05}
@@ -115,9 +96,6 @@ html{scroll-padding-top:var(--header-height)}
 .news-page .article-cover{max-width:300px}
 
 @media(max-width:1024px){
- .forge-layout{grid-template-columns:minmax(260px,.38fr) minmax(0,.62fr);padding-inline:5%;column-gap:24px}
- .forge .section-intro h1{font-size:40px}
- .forge .section-intro p{font-size:15px}
  .gallery.gallery{--gallery-cap:82vw}
 }
 @media(max-width:768px){
@@ -125,19 +103,6 @@ html{scroll-padding-top:var(--header-height)}
  .header .header-inner{padding-block:10px}
  .hero .hero-logo{width:min(350px,100%)}
  .hero.hero{padding:112px 0 88px}
- .forge-layout{display:flex;flex-direction:column;min-height:0;padding:36px 22px;gap:22px}
- .forge .section-intro h1{font-size:clamp(36px,9vw,48px)}
- .forge .section-intro p{font-size:15px;margin-top:18px;max-width:100%}
- .forge .ship-controls{width:100%;gap:12px 20px}
- .forge .assembly-scene{height:auto;aspect-ratio:1;max-height:none;width:100%;margin:0}
- .forge .forge-end{gap:4px}
- .outfitting{padding:32px 0}
- .outfitting-heading{padding-inline:22px}
- .outfitting-heading h2{font-size:30px}
- .outfitting .module-strip{display:block;padding-inline:22px;margin-top:20px}
- .outfitting .module-copy{width:100%;padding-top:22px}
- .outfitting .module-copy h2{font-size:26px}
- .outfitting .module-copy p{font-size:15px}
  .combat .combat-scene{padding:36px 22px;min-height:calc(100svh - var(--header-height));gap:180px}
  .combat .combat-scene>img{object-position:72% center}
  .combat .combat-scene h2{font-size:clamp(40px,10vw,58px)}
@@ -178,4 +143,30 @@ html{scroll-padding-top:var(--header-height)}
  .news-page .news-story{display:block;padding-block:26px}
  .news-page .news-masthead h1{font-size:48px}
  .news-page .article-cover{max-width:none}
+}
+/* Wide composition on compact windows, without a sidebar. */
+.forge.forge{padding:24px 0 32px}
+.forge .section-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.6fr);align-items:center;gap:32px;padding-inline:6%}
+.forge .section-intro h1{font-size:clamp(36px,4.5svh,56px);line-height:1.04;letter-spacing:-.025em}
+.forge .section-intro p{font-size:16px;line-height:1.65;max-width:400px;margin:0;justify-self:end}
+.forge .ship-controls{padding:12px 6% 0;gap:12px 28px;flex-wrap:wrap}
+.forge .ship-controls button[data-carousel-go]{min-height:44px;font-size:18px;padding-block:9px}
+.forge .assembly-scene{width:100%;max-width:1720px;height:auto;aspect-ratio:16/9;max-height:none;margin:10px auto 0}
+.forge .assembly-scene img{max-height:none}
+.forge .module-strip{margin:16px auto 0;gap:6%;padding-inline:6%}
+.forge .module-copy{min-height:0}
+.forge .forge-end{padding:20px 6% 0;display:flex;flex-direction:row;justify-content:space-between;align-items:center;gap:20px}
+.forge .forge-end .text-link{font-size:16px;min-height:44px}
+@media(max-width:768px){
+ .forge.forge{padding:32px 0}
+ .forge .section-intro{display:block;padding-inline:22px}
+ .forge .section-intro h1{font-size:clamp(36px,9vw,48px)}
+ .forge .section-intro p{margin-top:18px;max-width:none;font-size:15px}
+ .forge .ship-controls{padding:18px 22px 0;gap:12px 20px}
+ .forge .assembly-scene{aspect-ratio:1;margin-top:18px}
+ .forge .module-strip{display:block;padding-inline:22px;margin-top:20px}
+ .forge .module-copy{width:100%;padding-top:20px}
+ .forge .module-copy p{font-size:15px}
+ .forge .forge-end{padding-inline:22px;flex-wrap:wrap;gap:10px 24px}
+}
 }
