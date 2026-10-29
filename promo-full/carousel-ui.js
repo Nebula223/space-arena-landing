@@ -13,10 +13,10 @@
   const refresh=()=>{layers.forEach((layer,i)=>layer.querySelector('img').alt=slides[i].alt?.[language()]||slides[i].caption?.[language()]||'');updatePause();onChange?.(carousel.index);carousel.onChange(carousel.index).catch(()=>{});carousel.refresh();};
   carousel.prepare=index=>load((index+slides.length)%slides.length);listen(document,'promo-language-change',refresh);updatePause();return carousel;
  }
- controllers.forge=setup(document.querySelector('.forge'),data.forge,7000);
+ controllers.forge=setup(document.querySelector('.forge'),data.forge,5000);
  const gallery=document.querySelector('.gallery');
  function updateGallery(index){const lang=language(),count=data.gallery.length,src=slide=>lang==='ru'&&slide.srcRu?slide.srcRu:slide.src;gallery.querySelector('.gallery-caption').textContent=data.gallery[index].caption[lang];gallery.querySelector('.gallery-count').textContent=String(index+1).padStart(2,'0')+' / '+String(count).padStart(2,'0');gallery.querySelector('.gallery-open').setAttribute('aria-label',(lang==='ru'?'Увеличить: ':'Enlarge: ')+data.gallery[index].caption[lang]);gallery.querySelector('[data-gallery-prev]').setAttribute('aria-label',lang==='ru'?'Предыдущий кадр':'Previous image');gallery.querySelector('[data-gallery-next]').setAttribute('aria-label',lang==='ru'?'Следующий кадр':'Next image');gallery.querySelectorAll('[data-carousel-go]').forEach((b,i)=>b.setAttribute('aria-label',data.gallery[i].caption[lang]));gallery.querySelector('.peek-prev').src=src(data.gallery[(index-1+count)%count]);gallery.querySelector('.peek-next').src=src(data.gallery[(index+1)%count]);}
- controllers.gallery=setup(gallery,data.gallery,6000,updateGallery);
+ controllers.gallery=setup(gallery,data.gallery,4000,updateGallery);
  window.setupGalleryDrag({root:gallery,carousel:controllers.gallery,signal:abort.signal});
  listen(gallery.querySelector('[data-gallery-prev]'),'click',()=>controllers.gallery.next(-1));listen(gallery.querySelector('[data-gallery-next]'),'click',()=>controllers.gallery.next());
  listen(gallery.querySelector('.gallery-open'),'click',e=>document.dispatchEvent(new CustomEvent('promo-gallery-open',{detail:{index:controllers.gallery.index,trigger:e.currentTarget}})));

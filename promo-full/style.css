@@ -241,3 +241,6 @@ html{scroll-padding-top:var(--header-height)}
 @keyframes explosion-glow{0%,100%{opacity:.9}50%{opacity:1}}
 @media(max-width:768px){.parallax-layer img{object-position:38% center}}
 @media(prefers-reduced-motion:reduce){.parallax-layer{transform:none!important;transition:none!important}.parallax-layer img{animation:none!important}}
+
+/* At the top, blend the header into the hero without a bottom edge. */
+.header:not(.scrolled):not(.menu-open){border-bottom:0;box-shadow:none;background:linear-gradient(180deg,#010713c7,#01071300)}
