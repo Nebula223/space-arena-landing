@@ -12,11 +12,11 @@ function check(file,ref){
  links++;
 }
 for(const file of walk(out)){
- assert(!/(?:^|[\\/])(?:\.git|qa|exports|node_modules|_PromoRes|References|Pirate_Reference)(?:[\\/]|$)/.test(file),'Private directory in site');
+ assert(!/(?:^|[\\/])(?:\.git|qa|exports|node_modules|_PromoRes|References|Pirate_Reference)(?:[\\/]|$)/.test(path.relative(out,file)),'Private directory in site');
  if(!/\.(html|css|js|json)$/.test(file))continue;
  const text=fs.readFileSync(file,'utf8');for(const ref of references(text))check(file,ref);
  if(file.endsWith('.html'))for(const match of text.matchAll(/\b(?:href|src|poster)="([^"<>]*)"/g))check(file,match[1]);
 }
-const required=['promo-full/index.html','promo-full/news-v2.html','promo-full/faq-v2.html','interactive-demo/index.html','hangar/index.html','alternative/index.html','art-directions/a-cinematic/index.html','art-directions/b-tactical/index.html','art-directions/c-editorial/index.html',...['update-331','update-330','limit-breakers','space-legends'].map(id=>`promo-full/news/${id}/index.html`)];
+const required=['promo-full/index.html','promo-full/news-v2.html','promo-full/faq-v2.html',...['update-331','update-330','limit-breakers','space-legends'].map(id=>`promo-full/news/${id}/index.html`)];
 for(const file of required)assert(fs.existsSync(path.join(out,file)),'Missing direct route: '+file);
 console.log(JSON.stringify({requiredRoutes:required.length,localDependencies:links,result:'passed'}));

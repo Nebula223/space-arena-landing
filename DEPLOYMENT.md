@@ -1,67 +1,44 @@
-# GitHub Pages
+# GitHub Pages: сборка и передача
 
-Public repository: https://github.com/Nebula223/space-arena-landing
+Публичный репозиторий: https://github.com/Nebula223/space-arena-landing
 
-Site: https://nebula223.github.io/space-arena-landing/
+Демонстрация: https://nebula223.github.io/space-arena-landing/promo-full/index.html
 
-## Routes
+## Состав подготовленной сборки
 
-- `promo-full/index.html` — Concept D (the root URL redirects here).
-- `promo-full/news-v2.html` — current News.
-- `promo-full/news/update-331/`, `update-330/`, `limit-breakers/`, `space-legends/` — complete articles, each with a real `index.html`.
-- `promo-full/faq-v2.html` — FAQ.
-- `interactive-demo/index.html` — independent builder and scripted Canvas battle.
-- `hangar/index.html` — retained original Hangar.
-- `alternative/index.html` — alternative concept.
-- `art-directions/index.html` — A / B / C comparison.
-- `classic.html` — first landing concept.
-- `START-HERE.html` — all demo entries, without changes to the main site menu.
+Сборка содержит главную Concept D, `promo-full/news-v2.html`, `promo-full/faq-v2.html` и четыре отдельные статьи в `promo-full/news/`. Корневой `index.html` перенаправляет на главную. Вложенные страницы имеют настоящие HTML-файлы и открываются по прямым ссылкам.
 
-Every path is relative to `/space-arena-landing/`. There is no SPA router, fallback trick or server: nested article directories contain HTML files and work after reload.
+Старые концепции, Hangar и Interactive Demo не входят в подготовленную сборку, но остаются в исходном локальном проекте. Ссылки на них в новой сборке перестанут работать после публикации. Необходимые общие ресурсы временно сохраняют существующие пути в `art-directions/assets` и `hangar/assets`.
 
-## Build and deployment
+## Проверка сборки
 
-No npm dependencies, Vite, CMS or production server. GitHub Actions runs Node.js 24, the secret-pattern audit, `node scripts/build-pages.cjs`, `node scripts/check-pages.cjs`, and the official GitHub Pages actions pinned to inspected commit hashes. Only `dist/` is deployed, never the entire source repository. Pages settings use **GitHub Actions** as the publishing source.
-
-The builder copies the existing runtime dependency graph and adds static entry/index files. Existing designs and interaction scripts are not rewritten. The oldest concept's `_PromoRes` URLs are remapped in the generated output to seven selected web images in `assets/legacy/` and the existing video; the source archive is not needed. Local fonts and their licenses are included.
-
-Build from a fresh checkout (an existing nonempty `dist/` is deliberately rejected to prevent stale output):
+Нужен Node.js 24. Запускайте из свежего checkout, где `dist/` отсутствует или пуст:
 
 ```sh
+node scripts/audit-publication.cjs
 node scripts/build-pages.cjs
 node scripts/check-pages.cjs
 ```
 
-## Update from an ordinary GitHub clone
+Сборка намеренно отказывается записывать поверх непустого `dist/`. Не удаляйте существующую папку пользователя без согласования: для проверки используйте отдельную копию. Аудит ищет известные признаки секретов, но не гарантирует их отсутствие.
+
+GitHub Actions собирает статический сайт и публикует `dist/` на Pages. Проверьте результат в Actions и прямые ссылки после каждого согласованного обновления. `scripts/site-files.cjs` определяет страницы и граф зависимостей; `scripts/publish-pages.cjs` определяет дополнительные служебные файлы публичного снимка.
+
+## Публикация из исходной рабочей директории
+
+Рабочая ветка `design/concept-d` содержит локальные материалы, не предназначенные для публикации; не отправляйте её или `--all` на GitHub. После согласования изменений и проверки чистого рабочего состояния:
 
 ```sh
-git switch main
-git pull --ff-only
-# Edit the site files.
-git add <changed-files>
-git commit -m "Update Space Arena demo"
-git push origin main
-```
-
-The workflow starts automatically. Check the green result in **Actions → Deploy Space Arena to GitHub Pages** before sharing new content. Manual redeploy is available through **Run workflow**.
-
-## Update from the original design workspace
-
-The original `design/concept-d` history includes working source material that is intentionally not public. Its history has not been rewritten. Do **not** push that branch or `--all` to GitHub.
-
-```sh
-git switch design/concept-d
-git add <changed-files>
-git commit -m "Update design"
 node scripts/publish-pages.cjs --push
 ```
 
-This creates/advances the local `publish/github-pages` branch with a source allowlist, then performs a normal fast-forward push to remote `main`. The initial public commit has no parent from the private design history. It does not change the working branch, delete files, or use force push. If remote `main` changed elsewhere, a non-fast-forward push is rejected: reconcile deliberately, never force it.
+Скрипт доступен в исходной рабочей директории и не включён в очищенный публичный снимок. Он формирует проверяемый снимок в `publish/github-pages` и отправляет его обычным fast-forward в публичную `main`. Он не делает force push и не переписывает историю. Если удалённая ветка изменилась независимо, разберите расхождение до повторной отправки.
 
-## Publication boundaries
+Из обычного клона публичного репозитория разработчик может работать с опубликованными HTML/CSS/JS и отправлять согласованные изменения обычным Git. Генераторы, материалы ТЗ и прочие рабочие исходники могут отсутствовать в публичном снимке; не запускайте локальные генераторы, не проверив их наличие и действие.
 
-Excluded: original brief PDF/Markdown, `_PromoRes`, reference archives, exports/ZIP, QA/screenshots, unused PNG/JPEG masters, machine-specific tests, local configuration, credentials, caches and dependencies. A heuristic scan of tracked text and local historical text was performed before first publication; this is not a mathematical guarantee of absence of secrets. No secret values are printed or stored by publication helpers.
+## Ограничения для production
 
-WebGL remains unconnected because a real build/entry URL has not been supplied. The existing placeholder and future iframe integration are preserved. A future WebGL build may require framing permissions and server headers unavailable on ordinary Pages, especially cross-origin isolation for multithreading; assess the actual build before changing integration. The Canvas demo works independently and is not the real game.
-
-The current illustrations include temporary concept art; content/legal-link approval remains the project owner's responsibility. No analytics, advertising SDKs or paid services were added.
+- Настоящий WebGL пока не подключён (`promo-full/webgl-config.js`, `entryUrl: null`); необходимо проверить сам билд, условия доставки и встраивания.
+- Новостной и FAQ-контент, переводы, права на материалы и юридические URL требуют подтверждения владельцем.
+- Очистка текущего дерева репозитория не удаляет старые файлы из предыдущих публичных коммитов. История сохраняется; переписывание истории требует отдельного решения.
+- Подготовка локальной сборки не означает её публикацию или подтверждение полной production-готовности.

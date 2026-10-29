@@ -16,15 +16,10 @@ function references(text){
  }return refs;
 }
 function inventory(){
- const pages=['index.html',...['alternative','hangar','art-directions','promo-full','interactive-demo'].flatMap(dir=>walk(dir).filter(f=>f.endsWith('.html')))];
+ const pages=walk('promo-full').filter(f=>f.endsWith('.html'));
  const extra=[];
- for(const dir of ['hangar','alternative']){
-  for(const id of ['cannon','laser','weapon','shield','power-core','thruster','armor','supreme','vulture','prophet'])extra.push(`${dir}/assets/${id}.webp`);
-  for(const id of ['build','battle','research','fleet'])extra.push(`${dir}/assets/screen-${id}.webp`);
-  for(const font of ['Manrope','RobotoCondensed'])extra.push(`${dir}/assets/${font}-LICENSE.txt`);
- }
  for(const font of ['Manrope','RobotoCondensed'])extra.push(`art-directions/assets/${font}-LICENSE.txt`);
- for(let i=1;i<=7;i++)extra.push(`assets/screenshots/scene-${i}.webp`);
+ extra.push('promo-full/assets/icons/LUCIDE-LICENSE.txt','promo-full/assets/icons/SIMPLE-ICONS-LICENSE.txt');
  const queue=[...pages,...extra],files=new Set();
  while(queue.length){const file=queue.shift();if(files.has(file))continue;
   assert(!file.startsWith('../')&&!path.isAbsolute(file)&&!file.split('/').some(p=>p.startsWith('.')),'Unsafe site path: '+file);

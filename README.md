@@ -1,38 +1,45 @@
-# Space Arena Landing
+# Space Arena — промосайт
 
-Static HTML, CSS and JavaScript demonstration site. No npm dependencies, Vite, CMS or production server.
+Статический сайт игры Space Arena: HTML, CSS и JavaScript, без npm-зависимостей, CMS и серверной части. Текущая версия — демонстрационный Concept D; перед production-передачей требуется интеграция настоящего WebGL и подтверждение материалов и юридических ссылок.
 
-**Demo:** https://nebula223.github.io/space-arena-landing/
+## Основные страницы
 
-## Pages
+- `promo-full/index.html` — главная.
+- `promo-full/news-v2.html` — новости; отдельные статьи находятся в `promo-full/news/`.
+- `promo-full/faq-v2.html` — FAQ с разделами Gameplay, Ships и Weapons.
 
-- [Concept D](https://nebula223.github.io/space-arena-landing/promo-full/index.html)
-- [News and complete articles](https://nebula223.github.io/space-arena-landing/promo-full/news-v2.html)
-- [FAQ](https://nebula223.github.io/space-arena-landing/promo-full/faq-v2.html)
-- [Interactive Demo — ship builder and scripted battle](https://nebula223.github.io/space-arena-landing/interactive-demo/index.html)
-- [All concepts](https://nebula223.github.io/space-arena-landing/START-HERE.html)
+[Опубликованная демонстрация](https://nebula223.github.io/space-arena-landing/promo-full/index.html)
 
-The original Hangar, alternative landing and art directions A / B / C are preserved. Every nested article has a real HTML entry point and supports direct navigation/reload.
+Подготовленная сборка содержит только эти страницы и необходимые им ресурсы. Старые концепты и Interactive Demo сохранены в исходной локальной директории, но в новую сборку не включаются. Общие ресурсы актуального сайта находятся также в `art-directions/assets` и `hangar/assets`.
 
-## Local preview
+## Локальный просмотр
 
-Run `node preview.cjs`, then open `http://127.0.0.1:4173/promo-full/index.html` or `http://127.0.0.1:4173/interactive-demo/index.html`.
-
-## GitHub Pages
-
-Actions builds the audited static dependency graph into `dist/`, checks local links, then deploys it to Pages. The root redirects to Concept D; the earliest landing remains available as `classic.html` in the generated site.
-
-Build from a fresh checkout with Node.js 24:
+Откройте `promo-full/index.html` непосредственно в браузере. Для просмотра через HTTP при установленном Node.js:
 
 ```sh
+node preview.cjs
+```
+
+Откройте `http://127.0.0.1:4173/promo-full/index.html`. HTTP понадобится для проверки интеграций, которым недостаточно запуска через `file://`.
+
+## Структура и поведение
+
+- Hero собран из слоёв `promo-full/assets/parallax/`; учитываются настройки уменьшения движения. Исходный видео-вариант хранится в локальной рабочей директории как альтернатива.
+- Данные слайдов — `promo-full/carousel-data.js`. Forge переключается через 5 секунд, Gallery — через 4; доступны ручное управление, пауза, клавиатура и drag для Gallery.
+- RU/EN меняет тексты и изображения галереи; выбор языка хранится локально в браузере.
+- `promo-full/webgl-config.js`: `entryUrl: null`. Кнопки игры пока открывают заглушку: настоящий билд и его условия встраивания ещё не предоставлены.
+- Материалы новостей и FAQ сохранены как демонстрационные; актуальность, переводы и юридические документы нужно подтвердить перед production.
+
+## Сборка и публикация
+
+Node.js 24, свежий checkout без непустого `dist/`:
+
+```sh
+node scripts/audit-publication.cjs
 node scripts/build-pages.cjs
 node scripts/check-pages.cjs
 ```
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for direct routes, Git update commands and the separate sanitized publication branch used by the original design workspace. Do not push the private design history with `git push --all`.
+Сборка копирует граф необходимых файлов в `dist/`; GitHub Actions проверяет его и публикует на Pages. У исходной рабочей директории и публичного GitHub-репозитория разные истории: не отправляйте рабочую ветку напрямую. Подробности — [DEPLOYMENT.md](DEPLOYMENT.md), правила для разработки — [AGENTS.md](AGENTS.md).
 
-## Demo boundaries
-
-RU/EN and responsive layouts are retained. Interactive Demo is an illustrative, scripted Canvas concept, not the actual game balance or AI. WebGL is not connected because a build/entry URL has not been supplied; the existing placeholder remains intact.
-
-Game images and branding belong to their respective rights holders. Some promotional illustrations are temporary concept artwork. Local font licenses are included beside their assets. Working archives, the original brief, references, unused masters, local QA, caches and secrets are not included in the public snapshot.
+Публикацию выполняйте только после согласования. Не включайте в публичный репозиторий секреты, архивы, сырые материалы, исходное ТЗ и временные файлы. Иконки и шрифты сопровождаются лицензиями; игровые материалы принадлежат соответствующим правообладателям.
